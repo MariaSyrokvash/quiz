@@ -1,0 +1,16 @@
+.box {
+  display: flex;
+  padding: 15px 0;
+  justify-content: space-between;
+}
+
+.link {
+  font-size: 18px;
+  text-decoration: none;
+  color: white;
+}
+
+.active {
+  font-weight: bold;
+  color: #03CCFF;
+}

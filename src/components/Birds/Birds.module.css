@@ -1,0 +1,43 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;
+  height: 460px;
+}
+
+.nameCorrect {
+  text-align: left;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.list {
+  list-style: none;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-items: center;
+}
+
+.name {
+  width: 80%;
+  text-align: center;
+  font-size: 18px;
+  border: 1px solid gray;
+  margin-bottom: 13px;
+  padding: 15px;
+  cursor: pointer;
+  border-radius: 10px;
+  background-color: #222222;
+}
+
+.birdName {
+  margin: 0;
+}
+
+.reset {
+  background-color: #222222;
+}

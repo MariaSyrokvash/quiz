@@ -1,0 +1,13 @@
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.score {
+  margin-left: 3px;
+  color: #03CCFF;
+}
