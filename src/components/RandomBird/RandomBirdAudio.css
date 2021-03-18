@@ -1,0 +1,23 @@
+.rhap_container {
+  background-color: #222222;
+}
+
+.rhap_time {
+  color: white;
+}
+
+.rhap_button-clear {
+  color: #03CCFF;
+}
+
+.rhap_download-progress {
+
+}
+
+.rhap_progress-indicator {
+  background-color: #03CCFF;
+}
+
+.rhap_progress-filled {
+  background-color: #03CCFF;
+}

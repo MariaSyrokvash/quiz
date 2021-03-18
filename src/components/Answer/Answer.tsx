@@ -1,44 +1,46 @@
-import React from 'react';
+import React, {FC} from 'react';
 import style from './Answer.module.css'
-import {BirdType} from '../../redux/data-birds-reducer';
-import {useSelector} from 'react-redux';
-import {AppRootState} from '../../redux/store';
+import defaultImage from './../../assets/image/birdAnswer.jpg';
+import {BirdType} from '../../App';
+import AudioPlayer from 'react-h5-audio-player';
 
 type AnswerBirdType = {
-	setBirds: Array<BirdType>
+	correctAnswer: BirdType | null
+	currentSetBirds: Array<BirdType>
+	clickedBird: BirdType | null
 }
 
-export const AnswerBird = (props: AnswerBirdType) => {
-	const setBirds = props.setBirds;
-	const currentID = useSelector<AppRootState, string | null>(state => state.app.currentID)
-	const isTouched = useSelector<AppRootState, boolean>(state => state.app.isTouched)
-	const currentSet = setBirds[Number(currentID) - 1]
+export const AnswerBird: FC<AnswerBirdType> = ({correctAnswer, currentSetBirds, clickedBird}) => {
+
 
 	return (
 		<div className={style.box}>
 			{
-				isTouched
-					?
-					<div className={style.wrapperBird}>
-						<div className={style.innerBird}>
+				clickedBird ?
+					<>
+						<div className={style.wrapperBird}>
+							<div className={style.innerBird}>
+								<div>
+									<img src={clickedBird ? clickedBird.image : defaultImage} className={style.image}/>
+								</div>
+								<div className={style.nameBox}>
+									<p className={style.name}>{clickedBird && clickedBird.name}</p>
+									<p className={style.species}>{clickedBird && clickedBird.species}</p>
+								</div>
+							</div>
 							<div>
-								<img src={currentSet.image} className={style.image}/>
+								<AudioPlayer autoPlayAfterSrcChange={false} autoPlay={false} src={clickedBird ? clickedBird.audio : '****'} className={style.audio}></AudioPlayer>
 							</div>
-							<div className={style.nameBox}>
-								<p className={style.name}>{currentSet.name}</p>
-								<p className={style.species}>[{currentSet.species}]</p>
-							</div>
+							<div className={style.description}>{clickedBird && clickedBird.description}</div>
 						</div>
-						<div>
-							<audio controls src={currentSet.audio} className={style.audio}></audio>
-						</div>
-						<div className={style.description}>{currentSet.description}</div>
-					</div>
+					</>
 					:
-					<div className={style.default}>
-						<p>Послушайте плеер.</p>
-						<p>Выберите птицу из списка</p>
-					</div>
+					<>
+						<div className={style.default}>
+							<p>Послушайте плеер.</p>
+							<p>Выберите птицу из списка</p>
+						</div>
+					</>
 			}
 
 

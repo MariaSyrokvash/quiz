@@ -2,16 +2,55 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3bad73b0-5a8d-4cd1-b910-7489d079729a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Birds/sounds/wrong.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/RandomBird/RandomBirdAudio.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Statistics/Statistics.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Statistics/Statistics.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Answer/Answer.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Answer/Answer.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Answer/Answer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Answer/Answer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Birds/Birds.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Birds/Birds.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Birds/Birds.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Birds/Birds.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/LevelBtn/LevelBtn.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LevelBtn/LevelBtn.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/LevelBtn/LevelBtn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LevelBtn/LevelBtn.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ProgressBar/ProgressBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ProgressBar/ProgressBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RandomBird/RandomBird.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RandomBird/RandomBird.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Score/Score.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Score/Score.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/appReducer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/data-birds-reducer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/score-reducer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/store.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/random.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/random.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript JSX File" />
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="1mmpj03nvwc6oNrhBYrcW6pLGId" />
   <component name="ProjectViewState">
@@ -22,12 +61,22 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/RandomBird" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/RandomBird" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/Birds/sounds" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -37,11 +86,25 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1610108754357</updated>
-      <workItem from="1610108760943" duration="623000" />
+      <workItem from="1610108760943" duration="4580000" />
+      <workItem from="1610241214376" duration="8000" />
+      <workItem from="1615972727603" duration="23567000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/redux/birds.ts</url>
+          <line>2</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

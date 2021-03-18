@@ -1,0 +1,31 @@
+.statisticsBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}
+
+.title {
+  color: #03CCFF;
+  font-size: 40px;
+  line-height: 50px;
+}
+
+.subTitle {
+  font-style: italic;
+}
+
+.btn {
+  margin-top: 40px;
+  padding: 9px;
+  width: 15%;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background-color: #03CCFF;
+  color: white;
+}

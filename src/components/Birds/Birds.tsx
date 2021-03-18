@@ -1,80 +1,62 @@
-import React, {useEffect} from 'react';
+import React, {AudioHTMLAttributes, createRef, DetailedHTMLProps, FC, RefObject, useEffect, useState} from 'react';
 import style from './Birds.module.css'
-import {BirdType} from '../../redux/data-birds-reducer';
-import {useDispatch, useSelector} from 'react-redux';
-import {
-	disabledBtn, isColoredAC, isNextLevelAC,
-	isTouchedAC,
-	setCorrectAnswer,
-	setCurrentID,
-	setFinishAC
-} from '../../redux/appReducer';
-import {AppRootState} from '../../redux/store';
+import {BirdType} from '../../App';
 
-type PropsType = {
-	setBirds: Array<BirdType>
-	randomCorrectRandomBird: BirdType
-	isColored: boolean
-	isNextLevel: boolean
-	isFinish: boolean
+type BirdsPropsType = {
+	currentSetBirds: Array<BirdType>
+	correctAnswer: BirdType | null
+	setClickedBird: (bird: BirdType) => void
+	setDisabledNextLevel: (value: boolean) => void
+	clickedButtonCorrect: boolean
+	setClickedButtonCorrect: (value: boolean) => void
+	nexLevel: boolean
+	attempt: number
+	setAttempt: (value: number) => void
+	currentIndex: number
+	setFinishGame: (value: boolean) => void
 }
 
+export const Birds: FC<BirdsPropsType> = ({
+																						currentSetBirds,
+																						correctAnswer,
+																						setClickedBird,
+																						setDisabledNextLevel,
+																						clickedButtonCorrect,
+																						setClickedButtonCorrect,
+																						nexLevel,
+																						setAttempt,
+																						attempt,
+																						currentIndex,
+																						setFinishGame
+																					}) => {
+
+	const [audioCorrect] = useState(new Audio('https://bigsoundbank.com/UPLOAD/mp3/0028.mp3'));
+	const [audioWrong] = useState(new Audio('https://bigsoundbank.com/UPLOAD/mp3/0128.mp3'));
 
 
-export const Birds = (props: PropsType) => {
-	const dispatch = useDispatch()
-	const setBirds = props.setBirds;
-	// const isFinish = useSelector<AppRootState, boolean>(state => state.app.isFinish)
-	const isNextLevel = useSelector<AppRootState, boolean>(state => state.app.isNextLevel)
-	const isTouched = useSelector<AppRootState, boolean>(state => state.app.isTouched)
+	useEffect(() => {
+		Array.from(document.getElementsByClassName(style.errorAnswer)).forEach((element) =>element.className = style.name
+		)
+	}, [nexLevel])
 
-	console.log(isTouched, 'isTouched')
+	const onClickHandler = (id: number, event: any) => {
+		setClickedBird(currentSetBirds[id])
+		if (clickedButtonCorrect) return
+		setAttempt(attempt + 1)
 
-	if (isNextLevel && !isTouched ) {
-		dispatch(setFinishAC(false))
-		dispatch(isNextLevelAC(false))
-		dispatch(isColoredAC(false))
-	}
+		if (correctAnswer && correctAnswer.id === id) {
+			audioCorrect.play()
+			setClickedButtonCorrect(true)
+			setDisabledNextLevel(false)
 
-	// console.log(props.isFinish, 'false')
-	// console.log(props.isNextLevel, 'false')
-	// console.log(props.isColored, 'false')
-	//
-	// console.log(!props.isFinish)
-	// console.log(!props.isNextLevel)
-	// console.log(!props.isColored)
-
-	// @ts-ignore
-	const validateAnswerHandler = (event: any) => {
-		const value = event.target.innerHTML
-		const tagLi = event.currentTarget
-		console.log(props.randomCorrectRandomBird.name)
-
-		if (!props.isFinish && !props.isNextLevel && !props.isColored) {
-			tagLi.style.backgroundColor = 'red';
+			return false
 		}
 
-		dispatch(setCurrentID(event.currentTarget.id))
-		dispatch(isTouchedAC(true))
-
-
-
-		if (value === props.randomCorrectRandomBird.name) {
-			if (!props.isFinish && !props.isNextLevel && !props.isColored) {
-				tagLi.style.backgroundColor = 'greenyellow';
-			}
-
-			dispatch(setCorrectAnswer(true))
-			dispatch(disabledBtn(false))
-
-			dispatch(setFinishAC(true))
-			dispatch(isNextLevelAC(true))
-			dispatch(isColoredAC(true))
+		if (event.target.id !== id) {
+			audioWrong.play()
+			event.target.className = style.errorAnswer
+			return false
 		}
-
-		return
-
-		dispatch(setCorrectAnswer(false))
 	}
 
 
@@ -82,12 +64,13 @@ export const Birds = (props: PropsType) => {
 		<div className={style.box}>
 			<ul className={style.list}>
 				{
-					setBirds.map(bird => {
-						return <li key={bird.id} className={style.name}  onClick={validateAnswerHandler}
-											 id={String(bird.id)}>
-							<p className={style.birdName}>{bird.name}</p>
-
-						</li>
+					currentSetBirds.map(bird => {
+						return <button key={bird.id}
+													 className={`${style.name} ${bird.id === (correctAnswer && correctAnswer.id) && clickedButtonCorrect ? style.correctAnswer : ''}`}
+													 onClick={(event) => onClickHandler(bird.id, event)}
+													 id={String(bird.id)}>
+							{bird.name}
+						</button>
 					})
 				}
 			</ul>

@@ -1,17 +1,16 @@
-import React from 'react';
-import {useSelector} from 'react-redux';
-import {AppRootState} from '../../redux/store';
+import React, {FC} from 'react';
 import style from './Score.module.css';
 
-export const Score = () => {
-	const score = useSelector<AppRootState, number>(state => state.score.score)
+type ScorePropsType = {
+	score: number
+}
+
+export const Score: FC<ScorePropsType> = ({score}) => {
 
 	return (
-		<>
-			<div className={style.box}>
-				<p>Score: </p>
-				<p className={style.score}>{score}</p>
-			</div>
-		</>
+		<div className={style.box}>
+			<p>Счет: </p>
+			<p className={style.score}>{score}</p>
+		</div>
 	)
 }

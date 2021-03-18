@@ -1,15 +1,20 @@
-import React from 'react';
+import React, {FC} from 'react';
 import { Score } from '../Score/Score';
 import style from './Header.module.css';
 import logo from './../../assets/image/logo.svg';
 
-export const Header = () => {
+
+type HeaderPropsType = {
+	score: number
+}
+
+export const Header:FC<HeaderPropsType> = ({score}) => {
 	return (
 		<div className={style.box}>
 			<header className={style.header}>
 				<img src={logo} className={style.logo}/>
 			</header>
-			<Score />
+			<Score score={score}/>
 		</div>
 	)
 }

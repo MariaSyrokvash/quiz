@@ -1,77 +1,114 @@
 import React, {useEffect, useState} from 'react'
 import './App.css';
 import {Header} from './components/Header/Header';
-import {useDispatch, useSelector} from 'react-redux';
 import {RandomBird} from './components/RandomBird/RandomBird';
 import {Birds} from './components/Birds/Birds';
 import {LevelBtn} from './components/LevelBtn/LevelBtn';
 import {AnswerBird} from './components/Answer/Answer';
-import {AppRootState} from './redux/store';
-import {BirdsStateType,} from './redux/data-birds-reducer';
 import {ProgressBar} from './components/ProgressBar/ProgressBar';
 import {BrowserRouter} from 'react-router-dom';
-import {
-	disabledBtn,
-	incrementIndex,
-	initializedTC, isColoredAC, isNextLevelAC,
-	isTouchedAC,
-	setActivePageAC,
-	setCorrectAnswer, setFinishAC,
-} from './redux/appReducer';
+import {birds} from './redux/birds';
 import {randomInteger} from './utils/random';
+import {Statistics} from './components/Statistics/Statistics';
+
+export type BirdType = {
+	id: number
+	name: string
+	species: string
+	description: string
+	image: string
+	audio: string
+}
 
 function App() {
-	const pages = new Map([
-		['0', 'Разминка'],
-		['1', 'Воробьиные'],
-		['2', 'Лесные птицы'],
-		['3', 'Певчие птицы'],
-		['4', 'Хищные птицы'],
-		['5', 'Морские птицы']
-	]);
-	const isColored = useSelector<AppRootState, boolean>(state => state.app.isColored)
-	const birds = useSelector<AppRootState, Array<BirdsStateType>>(state => state.birds);
-	const currentIndex = useSelector<AppRootState, number>(state => state.app.currentIndex)
-	const currentPage = pages.get(String(currentIndex + 1))
-	const dispatch = useDispatch()
-	let setBirds = birds[currentIndex];
-	const isFinish = useSelector<AppRootState, boolean>(state => state.app.isFinish)
-	const isNextLevel = useSelector<AppRootState, boolean>(state => state.app.isNextLevel)
-	let randomCorrectRandomBird = setBirds[randomInteger(0, 5)];
+	const [random, setRandomNumber] = useState(randomInteger(0, 5))
+	const [score, setScore] = useState<number>(0)
+	const [attempt, setAttempt] = useState<number>(0)
+	const [currentIndex, setCurrentIndex] = useState<0 | 1 | 2 | 3 | 4 | 5 | number>(0)
+	const [currentSetBirds, setCurrentSetBirds] = useState<Array<BirdType>>(birds[currentIndex])
+	const [correctAnswer, setCorrectAnswer] = useState<BirdType | null>(currentSetBirds[random])
+	const [clickedBird, setClickedBird] = useState<BirdType | null>(null)
+	const [disabledNextLevel, setDisabledNextLevel] = useState<boolean>(true)
+	const [clickedButtonCorrect, setClickedButtonCorrect] = useState<boolean>(false)
+	const [nexLevel, setNexLevel] = useState<boolean>(false)
+	const [finishGame, setFinishGame] = useState<boolean>(false)
+
+	const resetSettings = () => {
+		setFinishGame(false)
+		setClickedButtonCorrect(false)
+		setClickedBird(null)
+		setRandomNumber(randomInteger(0, 5))
+		setCurrentIndex(0)
+		setAttempt(0)
+		setScore(0)
+	}
+
+	useEffect(() => {
+		setAttempt(0)
+		setCorrectAnswer(currentSetBirds[random])
+	}, [currentIndex, random, nexLevel, finishGame])
 
 
 	useEffect(() => {
-		initializedTC(currentIndex, randomCorrectRandomBird)
-	}, [currentIndex, randomCorrectRandomBird])
+		const randomNumber = randomInteger(0, 5)
+		if (nexLevel) {
+			setRandomNumber(randomNumber)
+			setCurrentSetBirds(birds[currentIndex])
+			setClickedBird(null)
+
+			setNexLevel(false)
+		}
+
+	}, [nexLevel])
 
 
 	const changeLevel = () => {
-		dispatch(incrementIndex())
-		dispatch(disabledBtn(true))
-		dispatch(setCorrectAnswer(false))
-		dispatch(isTouchedAC(false))
-		dispatch(setActivePageAC(currentPage))
-		const li = document.querySelectorAll('li')
-		console.log(li)
-		li.forEach(li => li.style.backgroundColor = '#222')
-		// dispatch(isNextLevelAC(true))
-		// dispatch(setFinishAC(true))
-		// dispatch(isColoredAC(true))
+		if(currentIndex === 5) {
+			setCorrectAnswer(null)
+			setFinishGame(true)
+			return false
+		}
+		setNexLevel(true)
+		setCurrentIndex(currentIndex + 1)
+		setDisabledNextLevel(true)
+		setCorrectAnswer(null)
+		setClickedButtonCorrect(false)
+		if (attempt === 1) {
+			setScore(() => score + 5)
+		} else if (attempt > 1) {
+			setScore(() => score + (5 - attempt))
+		}
 	}
-
-
 
 	return (
 		<div className="App">
 			<BrowserRouter>
-				<Header/>
-				<ProgressBar/>
-				<RandomBird randomCorrectRandomBird={randomCorrectRandomBird}/>
-				<div className='wrapper'>
-					<Birds setBirds={setBirds} randomCorrectRandomBird={randomCorrectRandomBird} isColored={isColored} isFinish={isFinish} isNextLevel={isNextLevel}/>
-					<AnswerBird setBirds={setBirds}/>
-				</div>
-				<LevelBtn changeLevel={changeLevel} />
+
+				{
+					finishGame ?
+						<Statistics score={score} resetSettings={resetSettings} />
+						:
+						<>
+							<Header score={score}/>
+							<ProgressBar currentIndex={currentIndex}/>
+							<RandomBird correctAnswer={correctAnswer} clickedButtonCorrect={clickedButtonCorrect}/>
+							<div className='wrapper'>
+								<Birds currentSetBirds={currentSetBirds} correctAnswer={correctAnswer} setClickedBird={setClickedBird}
+											 setDisabledNextLevel={setDisabledNextLevel}
+											 clickedButtonCorrect={clickedButtonCorrect}
+											 setClickedButtonCorrect={setClickedButtonCorrect}
+											 nexLevel={nexLevel}
+											 setAttempt={setAttempt}
+											 attempt={attempt}
+											 currentIndex={currentIndex}
+											 setFinishGame={setFinishGame}
+								/>
+								<AnswerBird correctAnswer={correctAnswer} currentSetBirds={currentSetBirds} clickedBird={clickedBird}/>
+							</div>
+							<LevelBtn changeLevel={changeLevel} disabledNextLevel={disabledNextLevel}/>
+						</>
+				}
+
 			</BrowserRouter>
 		</div>
 	);

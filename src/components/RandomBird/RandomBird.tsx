@@ -1,28 +1,26 @@
-import React from 'react';
+import React, {FC} from 'react';
 import style from './RandomBird.module.css';
-import {BirdType} from '../../redux/data-birds-reducer';
-import {useSelector} from 'react-redux';
-import {AppRootState} from '../../redux/store';
-import birdDefault from './../../assets/image/birdAnswer.jpg';
+import AudioPlayer from 'react-h5-audio-player';
+import 'react-h5-audio-player/lib/styles.css';
+import defaultImage from './../../assets/image/birdAnswer.jpg';
+import {BirdType} from '../../App';
+import './RandomBirdAudio.css';
 
 type RandomBirdType = {
-	randomCorrectRandomBird: BirdType
+	correctAnswer: BirdType | null
+	clickedButtonCorrect: boolean
 }
 
-export const RandomBird = (props: RandomBirdType) => {
-	const isCorrectAnswer = useSelector<AppRootState, boolean>(state => state.app.isCorrect)
-	const bird = props.randomCorrectRandomBird;
-
-	console.log(bird)
-
+export const RandomBird: FC<RandomBirdType> = ({correctAnswer, clickedButtonCorrect}) => {
 	return (
 		<div className={style.box}>
 			<div className={style.imageBox}>
-				<img src={isCorrectAnswer ? bird.image : birdDefault} className={style.image}/>
+				<img src={correctAnswer ? (clickedButtonCorrect ? correctAnswer.image :  defaultImage) : ''} className={style.image}/>
 			</div>
 			<div className={style.imageBox}>
-				<p className={style.name}>{isCorrectAnswer ? bird.name : '*****'}</p>
-				<audio src={bird.audio} controls={true}></audio>
+				<p className={style.name}>{clickedButtonCorrect ? correctAnswer&& correctAnswer.name: '*****'}</p>
+				{/*<audio src={correctAnswer ? correctAnswer.audio: ''} controls={true}></audio>*/}
+				<AudioPlayer  showDownloadProgress showFilledProgress autoPlay src={correctAnswer ? correctAnswer.audio: ''} ></AudioPlayer>
 			</div>
 		</div>
 	)

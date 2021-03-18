@@ -1,22 +1,15 @@
-import React from 'react';
-import {useSelector} from 'react-redux';
-import {AppRootState} from '../../redux/store';
+import React, {FC} from 'react';
 import style from './LevelBtn.module.css';
 
 type LevelBtnType = {
 	changeLevel: () => void
+	disabledNextLevel: boolean
 }
 
 
-export const LevelBtn = (props: LevelBtnType) => {
-	const disabledBtn = useSelector<AppRootState, boolean>(state => state.app.disabledBtn)
-
+export const LevelBtn: FC<LevelBtnType> = ({disabledNextLevel, changeLevel}) => {
 
 	return (
-		<>
-			<div>
-				<button disabled={disabledBtn} onClick={props.changeLevel} className={style.btn}>Дальше</button>
-			</div>
-		</>
+		<button disabled={disabledNextLevel} onClick={changeLevel} className={style.btn}>Дальше</button>
 	)
 }
